@@ -1,0 +1,34 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+
+entity marcapasso is
+port(
+	N0, N1, N2, sa, za, sv, zv: in bit;
+	Q2, Q1, Q0, pa, ta, pv, tv: out bit
+);
+end marcapasso;
+
+architecture main of marcapasso is
+	
+signal N0': bit;
+signal N1': bit;
+signal N2': bit;
+signal sa': bit;
+signal za': bit;
+signal sv': bit;
+signal zv': bit;
+
+begin
+	
+	N0' <= not N0;
+	N1' <= not N1;
+	N2' <= not N2;
+	sa' <= not sa;
+	za' <= not za;
+	sv' <= not sv;
+	zv' <= not zv;
+	
+	Q0 <= (N0' and N1' and N2') or (N1' and N2 and (N0 and (sa xor za))) or (N0 and sa' and za); 
+	
+end architecture main;
